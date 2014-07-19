@@ -22,6 +22,8 @@
 		352DB85F197A1056001651C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 352DB83E197A1056001651C6 /* UIKit.framework */; };
 		352DB867197A1056001651C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 352DB865197A1056001651C6 /* InfoPlist.strings */; };
 		352DB869197A1056001651C6 /* Tap_App_1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 352DB868197A1056001651C6 /* Tap_App_1Tests.m */; };
+		FA4BBD3E197B216D0066D838 /* TapCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BBD3D197B216D0066D838 /* TapCounter.m */; };
+		FA4BBD42197B28500066D838 /* TapCounterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BBD41197B28500066D838 /* TapCounterTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,9 @@
 		352DB864197A1056001651C6 /* Tap App 1Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tap App 1Tests-Info.plist"; sourceTree = "<group>"; };
 		352DB866197A1056001651C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		352DB868197A1056001651C6 /* Tap_App_1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tap_App_1Tests.m; sourceTree = "<group>"; };
+		FA4BBD3C197B216D0066D838 /* TapCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapCounter.h; sourceTree = "<group>"; };
+		FA4BBD3D197B216D0066D838 /* TapCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapCounter.m; sourceTree = "<group>"; };
+		FA4BBD41197B28500066D838 /* TapCounterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapCounterTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +127,8 @@
 				352DB853197A1056001651C6 /* ViewController.m */,
 				352DB855197A1056001651C6 /* Images.xcassets */,
 				352DB841197A1056001651C6 /* Supporting Files */,
+				FA4BBD3C197B216D0066D838 /* TapCounter.h */,
+				FA4BBD3D197B216D0066D838 /* TapCounter.m */,
 			);
 			path = "Tap App 1";
 			sourceTree = "<group>";
@@ -140,6 +147,7 @@
 		352DB862197A1056001651C6 /* Tap App 1Tests */ = {
 			isa = PBXGroup;
 			children = (
+				FA4BBD41197B28500066D838 /* TapCounterTest.m */,
 				352DB868197A1056001651C6 /* Tap_App_1Tests.m */,
 				352DB863197A1056001651C6 /* Supporting Files */,
 			);
@@ -253,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4BBD3E197B216D0066D838 /* TapCounter.m in Sources */,
 				352DB854197A1056001651C6 /* ViewController.m in Sources */,
 				352DB84B197A1056001651C6 /* AppDelegate.m in Sources */,
 				352DB847197A1056001651C6 /* main.m in Sources */,
@@ -263,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4BBD42197B28500066D838 /* TapCounterTest.m in Sources */,
 				352DB869197A1056001651C6 /* Tap_App_1Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,6 +480,7 @@
 				352DB86E197A1056001651C6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		352DB86F197A1056001651C6 /* Build configuration list for PBXNativeTarget "Tap App 1Tests" */ = {
 			isa = XCConfigurationList;
@@ -478,6 +489,7 @@
 				352DB871197A1056001651C6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
