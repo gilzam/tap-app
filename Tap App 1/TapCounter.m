@@ -11,14 +11,14 @@
 
 @implementation TapCounter
 
-
 - (id)init
 {
     self = [super init];
     
     if (self)
     {
-        tapCount = 0;
+        maxTapBreakNumber = 25;
+        [self resetTapCount];
     }
     
     return self;
@@ -35,11 +35,30 @@
 - (void)resetTapCount
 {
     tapCount = 0;
+    tapBreakNumber = arc4random_uniform(10)+1;
+    NSLog(@"Current tapCount: %d", tapCount);
+    NSLog(@"Random tapBreakNumber Generated: %d", tapBreakNumber);
 }
 
 // Return the current counter
 - (NSInteger)getTapCount
 {
     return tapCount;
+}
+
+// Return the current counter
+- (NSInteger)getTapBreakNumber
+{
+    return tapBreakNumber;
+}
+
+- (BOOL)tapsEqualsBreakNumber
+{
+    return tapCount == tapBreakNumber;
+}
+
+- (BOOL)tapsExceedsBreakNumber
+{
+    return tapCount > tapBreakNumber;
 }
 @end

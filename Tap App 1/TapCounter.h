@@ -10,9 +10,15 @@
 
 @interface TapCounter : NSObject
 {
-    NSInteger tapCount; // This is a private member of the TapCounter class; should be never accessed directly
+    // These are private members of the TapCounter class; should be never accessed directly
+    NSInteger tapCount;
+    NSInteger tapBreakNumber;
+    NSInteger maxTapBreakNumber;
 }
 - (void)incrementTapCount;
 - (void)resetTapCount;
 - (NSInteger)getTapCount;
+- (NSInteger)getTapBreakNumber;
+- (BOOL)tapsEqualsBreakNumber;
+- (BOOL)tapsExceedsBreakNumber;
 @end

@@ -11,7 +11,10 @@
 
 @interface ViewController : UIViewController
 {
+    UITapGestureRecognizer *oneFingerTap;
+    UITapGestureRecognizer *twoFingerTap;
     TapCounter *tapCounter; //A private reference to the tapCounter.
+    BOOL winning;
 }
 
 @end
