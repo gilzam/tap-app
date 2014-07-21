@@ -10,6 +10,8 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *tapDisplay;
+@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *levelLabel;
 
 @end
 
@@ -27,17 +29,30 @@
     [oneFingerTap setNumberOfTouchesRequired:1];
     [[self view] addGestureRecognizer:oneFingerTap];
     
+    longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(doTwoFingerTap:)];
+    [self.view addGestureRecognizer:longPress];
+
     twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doTwoFingerTap:)];
     [twoFingerTap setNumberOfTapsRequired:1];
     [twoFingerTap setNumberOfTouchesRequired:2];
     [self.view addGestureRecognizer:twoFingerTap];
 
-    // Initialize the tap counter on view load
+    gameState = [[GameState alloc] init];
     tapCounter = [[TapCounter alloc] init];
-    winning = true;
+    [gameState setWinning:true];
+    maxMilliseconds = 300;
+    wins = 0;
+    level = 1;
+//    [NSTimer scheduledTimerWithTimeInterval:2.0
+//                                     target:self
+//                                   selector:@selector(vibrate)
+//                                   userInfo:nil
+//                                    repeats:NO];
+    
+
     
 //    self.tapDisplay.text = [NSString stringWithFormat:@"%d", [tapCounter getTapCount]];
-    [self updateView:@"Tap until you feel a vibration!"];
+    [self updateView:@"Tap the screen and keep tapping!\nOnce you feel a vibration, stop tapping to win!"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,20 +66,24 @@
     if ([sender state] == UIGestureRecognizerStateRecognized)
     {
         NSLog(@"Tap detected");
-        // Here's where you trigger whatever action you need to.
-        // In this example, you want to increment |tapCounter| and log it.
-        // You will also want to trigger a vibration here.
         [tapCounter incrementTapCount];
+        if ([tapCounter getTapCount] == 1) {
+            milliseconds = maxMilliseconds;
+            timer = [NSTimer scheduledTimerWithTimeInterval:.001 target:self selector:@selector(timerTick:) userInfo:nil repeats:YES];
+//            start = [NSDate date];
+            //[TimerController startTimer];
+        }
+        milliseconds = maxMilliseconds;
         NSLog(@"Current tapCount: %ld", (long)[tapCounter getTapCount]);
-        if ([tapCounter tapsEqualsBreakNumber]) {
+        if ([tapCounter getTapCount] == [gameState getTapBreakNumber]) {
             NSLog(@"Taps Equals Break Number!");
             [self vibrate];
-            [self performSelector:@selector(checkForWin) withObject:nil afterDelay:1.5];
-        } else if ([tapCounter tapsExceedsBreakNumber]) {
+            [self performSelector:@selector(checkForWin) withObject:nil afterDelay:maxMilliseconds/100*.5];
+        } else if ([tapCounter getTapCount] > [gameState getTapBreakNumber]) {
             NSLog(@"Taps Exceeds Break Number!");
-            winning = false;
+            [gameState setWinning:false];
             [NSObject cancelPreviousPerformRequestsWithTarget:self];
-            [self performSelector:@selector(checkForWin) withObject:nil afterDelay:.0001];
+            [self performSelector:@selector(checkForWin) withObject:nil afterDelay:0];
             [self checkForWin];
         }
         [self updateView:@""];
@@ -76,27 +95,39 @@
 {
     if ([sender state] == UIGestureRecognizerStateRecognized)
     {
-        [self restartGame];
+        [tapCounter resetTapCount];
+        oneFingerTap.enabled = true;
+        milliseconds = maxMilliseconds;
+        if (timer) {
+            [timer invalidate];
+            timer = nil;
+        }
+        [self updateView:@"Tap the screen and keep tapping!\nOnce you feel a vibration, stop tapping to win!"];
+        
+        [gameState resetGameState];
     }
 }
 
-// When the view disappears (say you press the home button), reset the tapCount
-// Of course, you may want instead to just stop the timer, but that's your decision.
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [tapCounter resetTapCount];
-}
-
-- (void)updateView:(NSString *)text;
-{
-    self.tapDisplay.text = text;
+- (void)timerTick:(NSTimer *)timer {
+    milliseconds--;
+    if (milliseconds <= 0) {
+        [gameState setWinning:false];
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        [self performSelector:@selector(checkForWin) withObject:nil afterDelay:0];
+        [self checkForWin];
+    }
+    [self updateView:@""];
 }
 
 - (void)checkForWin
 {
     if ([tapCounter getTapCount] != 0) {
         oneFingerTap.enabled = false;
-        if (winning) {
+        if (timer) {
+            [timer invalidate];
+            timer = nil;
+        }
+        if ([gameState isWinning]) {
             [self runWin];
         } else {
             [self runLose];
@@ -107,28 +138,43 @@
 - (void)runWin
 {
     NSLog(@"runWin:");
-    [self updateView:@"You win! Two finger tap to restart!"];
+    wins++;
+    if (wins % 3 == 0) {
+        maxMilliseconds -= maxMilliseconds * .05;
+        level++;
+    }
+    NSLog(@"Wins: %d", wins);
+    NSLog(@"maxMilliseconds: %d", maxMilliseconds);
+    [self updateView:@"You win! Hold finger down and release to restart!"];
 }
 
 - (void)runLose
 {
     NSLog(@"runLose:");
-    [self updateView:@"You lost...two finger tap to restart."];
+    if (wins > 0) {
+        wins--;
+    }
+    [self vibrate];
+    [self updateView:@"You lost...hold finger down and release to restart."];
 }
 
-- (void)restartGame
+- (void)viewDidDisappear:(BOOL)animated
 {
     [tapCounter resetTapCount];
-    winning = true;
-    oneFingerTap.enabled = true;
-    [self updateView:@"Tap until you feel a vibration!"];
+}
+
+- (void)updateView:(NSString *)text;
+{
+    self.timerLabel.text = [NSString stringWithFormat:@"Time left to tap: %d", milliseconds];
+    self.levelLabel.text = [NSString stringWithFormat:@"Level: %d", level];
+    self.tapDisplay.text = text;
 }
 
 - (void)vibrate
 {
     NSLog(@"Vibrate");
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-//    AudioServicesPlaySystemSoundWithVibration(kSystemSoundID_Vibrate, nil,NSDictionary* vibratePattern)
+//    AudioServicesPlaySystemSoundWithVibration(kSystemSoundID_Vibrate, nil, NSDictionary* vibratePattern)
 
 }
 

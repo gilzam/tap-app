@@ -2,7 +2,7 @@
 //  TapCounter.m
 //  Tap App 1
 //
-//  Created by Alex Bardasu on 19/07/14.
+//  Created by Gil Zamir on 19/07/14.
 //  Copyright (c) 2014 ___Social_Party___. All rights reserved.
 //
 //  This is a model class; contains no controller or view logic whatsoever.
@@ -17,7 +17,6 @@
     
     if (self)
     {
-        maxTapBreakNumber = 25;
         [self resetTapCount];
     }
     
@@ -35,9 +34,7 @@
 - (void)resetTapCount
 {
     tapCount = 0;
-    tapBreakNumber = arc4random_uniform(10)+1;
     NSLog(@"Current tapCount: %d", tapCount);
-    NSLog(@"Random tapBreakNumber Generated: %d", tapBreakNumber);
 }
 
 // Return the current counter
@@ -46,19 +43,4 @@
     return tapCount;
 }
 
-// Return the current counter
-- (NSInteger)getTapBreakNumber
-{
-    return tapBreakNumber;
-}
-
-- (BOOL)tapsEqualsBreakNumber
-{
-    return tapCount == tapBreakNumber;
-}
-
-- (BOOL)tapsExceedsBreakNumber
-{
-    return tapCount > tapBreakNumber;
-}
 @end

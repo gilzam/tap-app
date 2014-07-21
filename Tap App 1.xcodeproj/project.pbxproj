@@ -22,6 +22,8 @@
 		352DB85F197A1056001651C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 352DB83E197A1056001651C6 /* UIKit.framework */; };
 		352DB867197A1056001651C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 352DB865197A1056001651C6 /* InfoPlist.strings */; };
 		352DB869197A1056001651C6 /* Tap_App_1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 352DB868197A1056001651C6 /* Tap_App_1Tests.m */; };
+		35BAECA6197C8F30009DF660 /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 35BAECA5197C8F30009DF660 /* GameState.m */; };
+		35BAECA9197CA0DC009DF660 /* TimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35BAECA8197CA0DC009DF660 /* TimerController.m */; };
 		FA4BBD3E197B216D0066D838 /* TapCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BBD3D197B216D0066D838 /* TapCounter.m */; };
 		FA4BBD42197B28500066D838 /* TapCounterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = FA4BBD41197B28500066D838 /* TapCounterTest.m */; };
 /* End PBXBuildFile section */
@@ -57,6 +59,10 @@
 		352DB864197A1056001651C6 /* Tap App 1Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tap App 1Tests-Info.plist"; sourceTree = "<group>"; };
 		352DB866197A1056001651C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		352DB868197A1056001651C6 /* Tap_App_1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tap_App_1Tests.m; sourceTree = "<group>"; };
+		35BAECA4197C8F30009DF660 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		35BAECA5197C8F30009DF660 /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
+		35BAECA7197CA0DC009DF660 /* TimerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerController.h; sourceTree = "<group>"; };
+		35BAECA8197CA0DC009DF660 /* TimerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerController.m; sourceTree = "<group>"; };
 		FA4BBD3C197B216D0066D838 /* TapCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapCounter.h; sourceTree = "<group>"; };
 		FA4BBD3D197B216D0066D838 /* TapCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapCounter.m; sourceTree = "<group>"; };
 		FA4BBD41197B28500066D838 /* TapCounterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapCounterTest.m; sourceTree = "<group>"; };
@@ -125,10 +131,14 @@
 				352DB84F197A1056001651C6 /* Main_iPad.storyboard */,
 				352DB852197A1056001651C6 /* ViewController.h */,
 				352DB853197A1056001651C6 /* ViewController.m */,
+				35BAECA7197CA0DC009DF660 /* TimerController.h */,
+				35BAECA8197CA0DC009DF660 /* TimerController.m */,
 				352DB855197A1056001651C6 /* Images.xcassets */,
 				352DB841197A1056001651C6 /* Supporting Files */,
 				FA4BBD3C197B216D0066D838 /* TapCounter.h */,
 				FA4BBD3D197B216D0066D838 /* TapCounter.m */,
+				35BAECA4197C8F30009DF660 /* GameState.h */,
+				35BAECA5197C8F30009DF660 /* GameState.m */,
 			);
 			path = "Tap App 1";
 			sourceTree = "<group>";
@@ -262,9 +272,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA4BBD3E197B216D0066D838 /* TapCounter.m in Sources */,
+				35BAECA9197CA0DC009DF660 /* TimerController.m in Sources */,
 				352DB854197A1056001651C6 /* ViewController.m in Sources */,
 				352DB84B197A1056001651C6 /* AppDelegate.m in Sources */,
 				352DB847197A1056001651C6 /* main.m in Sources */,
+				35BAECA6197C8F30009DF660 /* GameState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
